@@ -9,13 +9,10 @@ const {
 const { protect, checkPermission } = require('../middleware/authMiddleware');
 
 // All role routes should be protected and require role management permissions
-// For bootstrapping, we might need to allow initial creation, but for now we assume seed data
-router.route('/')
-  .get(protect, checkPermission('manage_roles'), getRoles)
-  .post(protect, checkPermission('manage_roles'), createRole);
-router
-  .route('/:id')
-  .put(protect, checkPermission('manage_roles'), updateRole)
-  .delete(protect, checkPermission('manage_roles'), deleteRole);
+router.get('/', protect, checkPermission('manage_roles'), getRoles);
+router.post('/', protect, checkPermission('manage_roles'), createRole);
+
+router.put('/:id', protect, checkPermission('manage_roles'), updateRole);
+router.delete('/:id', protect, checkPermission('manage_roles'), deleteRole);
 
 module.exports = router;

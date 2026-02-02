@@ -11,14 +11,12 @@ const {
 const { protect, checkPermission } = require('../middleware/authMiddleware');
 
 router.post('/login', authUser);
-router.route('/profile').put(protect, updateUserProfile);
-router
-  .route('/')
-  .post( registerUser)
-  .get(protect, checkPermission('manage_users'), getUsers);
-router
-  .route('/:id')
-  .delete(protect, checkPermission('manage_users'), deleteUser)
-  .put(protect, checkPermission('manage_users'), updateUser);
+router.put('/profile', protect, updateUserProfile);
+
+router.post('/', registerUser);
+router.get('/', protect, checkPermission('manage_users'), getUsers);
+
+router.delete('/:id', protect, checkPermission('manage_users'), deleteUser);
+router.put('/:id', protect, checkPermission('manage_users'), updateUser);
 
 module.exports = router;
