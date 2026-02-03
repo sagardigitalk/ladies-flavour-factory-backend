@@ -5,7 +5,7 @@ const Product = require('../models/productModel');
 // @route   GET /api/reports/inventory
 // @access  Private
 const getInventoryReport = asyncHandler(async (req, res) => {
-  const products = await Product.find({}).populate('category', 'name');
+  const products = await Product.find({}).populate('catalog', 'name');
 
   const totalStockValue = products.reduce((acc, p) => acc + (p.stockQuantity * p.costPrice), 0);
   const lowStockCount = products.filter(p => p.stockQuantity < 10).length;

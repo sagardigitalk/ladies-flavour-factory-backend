@@ -17,13 +17,13 @@ const getProducts = asyncHandler(async (req, res) => {
     ];
   }
 
-  if (req.query.category) {
-    query.category = req.query.category;
+  if (req.query.catalog) {
+    query.catalog = req.query.catalog;
   }
 
   const count = await Product.countDocuments({ ...query });
   const products = await Product.find({ ...query })
-    .populate('category', 'name')
+    .populate('catalog', 'name')
     .limit(pageSize)
     .skip(pageSize * (page - 1));
 
@@ -35,7 +35,7 @@ const getProducts = asyncHandler(async (req, res) => {
 // @access  Private
 const getProductById = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id).populate(
-    'category',
+    'catalog',
     'name'
   );
 
@@ -54,7 +54,7 @@ const createProduct = asyncHandler(async (req, res) => {
   const {
     name,
     sku,
-    category,
+    catalog,
     description,
     unitPrice,
     costPrice,
@@ -69,7 +69,7 @@ const createProduct = asyncHandler(async (req, res) => {
   const product = new Product({
     name,
     sku,
-    category,
+    catalog,
     description,
     images: imagePath ? [imagePath] : [],
     unitPrice,
@@ -101,7 +101,7 @@ const updateProduct = asyncHandler(async (req, res) => {
   if (product) {
     product.name = name || product.name;
     product.sku = sku || product.sku;
-    product.category = category || product.category;
+    product.catalog = catalog || product.catalog;
     product.description = description || product.description;
     product.unitPrice = unitPrice || product.unitPrice;
     product.costPrice = costPrice || product.costPrice;

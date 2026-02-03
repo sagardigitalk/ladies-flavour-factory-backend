@@ -11,9 +11,9 @@ const productSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    category: {
+    catalog: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Category',
+      ref: 'Catalog',
       required: true,
     },
     description: {

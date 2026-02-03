@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
-const categoryRoutes = require('./routes/categoryRoutes');
+const catalogRoutes = require('./routes/catalogRoutes');
 const productRoutes = require('./routes/productRoutes');
 const stockRoutes = require('./routes/stockRoutes');
 const roleRoutes = require('./routes/roleRoutes');
@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', userRoutes);
 app.use('/api/roles', roleRoutes);
-app.use('/api/categories', categoryRoutes);
+app.use('/api/catalogs', catalogRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/stock', stockRoutes);
 app.use('/api/notifications', notificationRoutes);

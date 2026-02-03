@@ -24,9 +24,9 @@ const ALL_PERMISSIONS = [
   'manage_stock',
   // Reports
   'view_reports',
-  // Category Management
-  'view_categories',
-  'manage_categories',
+  // Catalog Management
+  'view_catalog',
+  'manage_catalog',
   // Barcodes
   'view_barcodes',
 ];
