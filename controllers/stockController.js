@@ -7,7 +7,14 @@ const Product = require('../models/productModel');
 // @access  Private
 const getStockTransactions = asyncHandler(async (req, res) => {
   const transactions = await StockTransaction.find({})
-    .populate('product', 'name sku')
+    .populate({
+      path: 'product',
+      select: 'name sku catalog',
+      populate: {
+        path: 'catalog',
+        select: 'name'
+      }
+    })
     .populate('user', 'name')
     .sort({ createdAt: -1 });
   res.json(transactions);

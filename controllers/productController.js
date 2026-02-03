@@ -89,7 +89,7 @@ const updateProduct = asyncHandler(async (req, res) => {
   const {
     name,
     sku,
-    category,
+    catalog,
     description,
     unitPrice,
     costPrice,
