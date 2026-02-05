@@ -45,6 +45,12 @@ const getStockTransactions = asyncHandler(async (req, res) => {
     query.createdAt = { $gte: start, $lte: end };
   }
 
+  // Filter by User Role: Admin sees all, others see only their own
+  const isAdmin = req.user.role && req.user.role.name === 'Admin';
+  if (!isAdmin) {
+    query.user = req.user._id;
+  }
+
   const [count, transactions] = await Promise.all([
     StockTransaction.countDocuments({ ...query }),
     StockTransaction.find({ ...query })
